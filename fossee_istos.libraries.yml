@@ -6,7 +6,6 @@ global-styling:
       css/colors.css: {}
   js:
     js/custom.js: {}
-    js/superfish.js: {}
   dependencies:
     - core/jquery
     - core/drupal.ajax
@@ -38,6 +37,9 @@ flexslider:
 # Bootstrap
 bootstrap:
   version: 1.x
+  css:
+    theme:
+      includes/bootstrap/css/bootstrap.min.css: {}
   js:
     includes/bootstrap/js/popper.min.js: {}
     includes/bootstrap/js/bootstrap.min.js: {}
@@ -46,6 +48,7 @@ bootstrap:
     - core/drupal.ajax
     - core/drupal
     - core/drupalSettings
+  
 
 # Font awesome
 font-awesome:
@@ -54,6 +57,11 @@ font-awesome:
     theme:
       includes/font-awesome/css/all.min.css: {}
       includes/font-awesome/css/v4-shims.min.css: {}
+  js :
+    includes/font-awesome/js/all.js: {}
+    includes/font-awesome/js/v4-shims.js: {}
+
+
 
 bootstrap-scripts:
   js:

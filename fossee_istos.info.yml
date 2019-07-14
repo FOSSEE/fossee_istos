@@ -25,7 +25,7 @@ libraries:
   - 'fossee_istos/color.preview'
   - 'fossee_istos/bootstrap'
   - 'fossee_istos/flexslider'
-  - 'fossee_istos/fontawesome'
+  - 'fossee_istos/font-awesome'
   - 'fossee_istos/bootstrap-scripts'
   
 
