@@ -1,0 +1,185 @@
+<?php
+
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+use Drupal\Core\Template\RenderWrapper;
+use Drupal\Core\Template\Attribute;
+use Drupal\search\Form\SearchBlockForm;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\system\Form\ThemeSettingsForm;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+use Drupal\file\Plugin\Core\Entity\FileInterface;
+
+/**
+ * Implements hook_preprocess_page() for block templates.
+ */
+function fossee_istos_preprocess_block(&$variables) {
+  global $base_path, $theme_name;
+  
+    // Social media global variable.
+    $variables['show_social_icon'] = theme_get_setting('show_social_icon');
+    $variables['facebook_url'] = theme_get_setting('facebook_url');
+    $variables['google_plus_url'] = theme_get_setting('google_plus_url');
+    $variables['twitter_url'] = theme_get_setting('twitter_url');
+    $variables['linkedin_url'] = theme_get_setting('linkedin_url');
+}
+  
+function fossee_istos_preprocess_page(&$variables) {
+  
+  // Slider
+  // Assign Variable for slider
+   if ($variables['is_front']) {
+    
+    if (theme_get_setting('show_slideshow','fossee_istos') == 1) {
+      $variables['show_slideshow'] = 1;
+      $variables['slider_content'] = fossee_istos_get_slider_content();
+     }
+  }
+}  
+
+ 
+  /**
+   * Slider
+   * Implements custom function for get slider content.
+   */
+
+  function fossee_istos_get_slider_content() {
+    $slider_content = array();
+    for ($i = 1; $i <= theme_get_setting('no_of_slides'); $i++) {
+      $fid = theme_get_setting('slide_image_path'.$i,'fossee_istos');
+      if (!empty($fid)) {
+        $file = file_load($fid[0]);
+        $uri = $file->getFileUri();
+        $path = file_create_url($uri);
+      }
+      else {
+        $path = base_path() . drupal_get_path('theme', 'fossee_istos') . theme_get_setting('slide_image_path_' . $i, 'fossee_istos');
+      }
+      $slider_content[$i] = '<li>
+        <img src="' . $path . '" alt="loading..." />
+        <div class="slider-caption">
+          <h2 class="slider-title">' . theme_get_setting('slide_title_' . $i, 'fossee_istos').'</h2>
+          <div class="clearfix"><p class="slider-description">' . theme_get_setting('slide_description_' . $i, 'fossee_istos').'</p></div>
+          <a href=' . theme_get_setting('slide_url_' . $i, 'fossee_istos') . ' class="more-link">Read more</a>
+        </div>
+      </li>';
+    }
+    return $slider_content;
+  }
+
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+
+ function fossee_istos_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  //Social Icon Link
+  $form['fossee_istos_settings']['social_icon'] = array(
+    '#type' => 'details',
+    '#title' => t('Social Media Link'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['fossee_istos_settings']['social_icon']['show_social_icon'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Social Icons'),
+    '#default_value' => theme_get_setting('show_social_icon'),
+    '#description'   => t("Show/Hide Social media links"),
+  );
+  $form['fossee_istos_settings']['social_icon']['facebook_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook URL'),
+    '#default_value' => theme_get_setting('facebook_url'),
+  );
+  $form['fossee_istos_settings']['social_icon']['google_plus_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google plus URL'),
+    '#default_value' => theme_get_setting('google_plus_url'),
+  );
+  $form['fossee_istos_settings']['social_icon']['twitter_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter URL'),
+    '#default_value' => theme_get_setting('twitter_url'),
+  );
+  $form['fossee_istos_settings']['social_icon']['linkedin_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('LinkedIn URL'),
+    '#default_value' => theme_get_setting('linkedin_url'),
+  );
+
+  //Slide show configure 
+  $form['fossee_istos_settings']['slideshow'] = array(
+    '#type' => 'details',
+    '#title' => t('Slideshow'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['fossee_istos_settings']['slideshow']['no_of_slides'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Number of slides'),
+    '#default_value' => theme_get_setting('no_of_slides'),
+    '#description'  => t("Enter the number of slides required & Save configuration"),
+    '#markup' => '<div class="messages messages--warning">Clear caches after making any changes in theme settings. <a href="../../config/development/performance">Click here to clear cache</a></div>',
+  );
+  $form['fossee_istos_settings']['slideshow']['show_slideshow'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Slideshow'),
+    '#default_value' => theme_get_setting('show_slideshow'),
+    '#description'   => t("Show/Hide Slideshow in home page"),
+  );
+  $form['fossee_istos_settings']['slideshow']['slide'] = array(
+    '#markup' => t('Change the Slider image, title, description and link using below fieldset'),
+  );
+  
+  for ($i = 1; $i <= theme_get_setting('no_of_slides'); $i++) {
+    $form['fossee_istos_settings']['slideshow']['slide' . $i] = array(
+      '#type' => 'details',
+      '#title' => t('Slide '.$i),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    $form['fossee_istos_settings']['slideshow']['slide' . $i]['slide_image_path' . $i] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Slide '.$i.' Image'),
+      '#default_value' => theme_get_setting('slide_image_path'.$i,'fossee_istos'),
+      '#upload_location' => 'public://',
+    );
+    $form['fossee_istos_settings']['slideshow']['slide' . $i]['slide_title_' . $i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Slide '.$i.' Title'),
+      '#default_value' => theme_get_setting('slide_title_' . $i,'fossee_istos'),
+    );
+    $form['fossee_istos_settings']['slideshow']['slide' . $i]['slide_description_' . $i] = array(
+      '#type' => 'textarea',
+      '#title' => t('Slide '.$i.' Description'),
+      '#default_value' => theme_get_setting('slide_description_' . $i,'fossee_istos'),
+    );    
+    $form['fossee_istos_settings']['slideshow']['slide' . $i]['slide_url_' . $i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Slide '.$i.' URL'),
+      '#default_value' => theme_get_setting('slide_url_' . $i,'fossee_istos'),
+    );
+
+    // Make the uploaded images permanent.
+    $image = theme_get_setting('slide_image_path'.$i,'fossee_istos');
+    if(!empty($image)){
+      $file = File::load($image[0]);
+      $file->status = FILE_STATUS_PERMANENT;
+      $file->save();
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage_check = $file_usage->listUsage($file);
+      if (empty($file_usage_check)) {
+        $file_usage->add($file, 'fossee_istos', 'theme', $image[0]);
+      }
+    }
+  }
+}
+

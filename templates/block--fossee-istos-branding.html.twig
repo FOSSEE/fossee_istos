@@ -1,0 +1,43 @@
+
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ */
+#}
+{% block content %}
+  {% if site_logo %}
+      <div class="region region-navigation top-nav" style="margin-bottom: 5px; padding-top: 30px;padding-bottom: 30px;width: 1137px; padding-left: 30px; border-radius:8px;" >
+          <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+            <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+          </a>
+        {% endif %}
+        <div class="social_media">
+              {% if show_social_icon %}
+                    {% if facebook_url %}
+                      <a class="social" href="{{ facebook_url }}"  class="facebook" target="_blank"  title="{{ 'Facebook'|t }}" ><i class="fab fa-facebook-f"></i></a>
+                    {% endif %}
+                    {% if google_plus_url %}
+                      <a class="social" href="{{ google_plus_url }}"  class="google-plus" target="_blank"  title="{{ 'Google plus'|t }}" ><i class="fab fa-google-plus-g"></i></a>
+                    {% endif %}
+                    {% if twitter_url %}
+                      <a class="social" href="{{ twitter_url }}" class="twitter" target="_blank"  title="{{ 'Twitter'|t }}"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                    {% if linkedin_url %}
+                      <a  class="social" href="{{ linkedin_url }}" class="linkedin" target="_blank"  title="{{ 'Linked In'|t }}"><i class="fab fa-linkedin-in"></i></a>
+                    {% endif %}
+                  </p>                                
+                {% endif %}  
+        </div>
+     </div> 
+{% endblock %}
+ 

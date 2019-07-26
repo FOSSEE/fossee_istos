@@ -1,0 +1,33 @@
+core: 8.x
+type: theme
+base theme: bootstrap
+name: 'fossee_istos'
+description: 'A Drupal Bootstrap 3 based sub-theme.'
+package: 'Bootstrap'
+
+regions: 
+  navigation: 'Navigation'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  header: 'Top Bar'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer: 'Footer'
+  footer1: 'Footer1'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  banner: 'Banner'
+
+libraries:
+  - 'fossee_istos/global-styling'
+  - 'fossee_istos/color.preview'
+  - 'fossee_istos/bootstrap'
+  - 'fossee_istos/flexslider'
+  - 'fossee_istos/font-awesome'
+  - 'fossee_istos/bootstrap-scripts'
+  
+
+  
+  
