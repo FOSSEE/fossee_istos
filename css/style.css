@@ -100,8 +100,8 @@
 
 /* navbar */
 ul.menu.menu--main.nav.navbar-nav {
-   width: 1134px !important;
-   margin-left: -13px ;
+   width: 1169px !important;
+   margin-left: -15px ;
    border-style: groove;
    border-color: #6c8f8b;
    border-width: 1px;
@@ -316,4 +316,8 @@ footer.footer {
 footer {
    padding-left: 0px !important;
    padding-right: 0px !important;
+}
+
+#navbar{
+   padding-left: 0px;
 }
