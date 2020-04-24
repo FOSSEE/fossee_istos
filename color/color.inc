@@ -8,7 +8,8 @@
 $info = [
   // Available colors and color labels used in theme.
   'fields' => [
-    'topnav' => t('Header and Footer Text color'),
+    'topnav' => t('Header Text color'),
+    'topnav1' => t('Footer Text color'),
     'header' => t('Header background'),
     'footer' => t('Footer background'),
     'top' => t('Navbar background'),
@@ -27,6 +28,7 @@ $info = [
       'title' => t('Fossee (default)'),
       'colors' => [
         'topnav' => '#ffffff',
+        'topnav1' => '#f8f8f8',
         'header' => '#0F52BA',
         'footer' => '#444444',
         'top' => '#3498db',

@@ -16,6 +16,7 @@
 
 
       $colorPreview.find('.color-preview-top-head *, .color-preview-footer-wrapper *').css('color', $colorPalette.find('input[name="palette[topnav]"]').val());
+      $colorPreview.find('.color-preview-footer-wrapper *').css('color', $colorPalette.find('input[name="palette[topnav1]"]').val());
       $colorPreview.find('.color-preview-top-head').css('background-color', $colorPalette.find('input[name="palette[header]"]').val());
       $colorPreview.find('.color-preview-footer-wrapper').css('background-color', $colorPalette.find('input[name="palette[footer]"]').val());
       $colorPreview.find('.color-preview-main h2, .color-preview .preview-content, .color-preview-content h1, .preview-content ').css('color', $colorPalette.find('input[name="palette[text]"]').val());
