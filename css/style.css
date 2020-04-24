@@ -321,18 +321,26 @@ footer {
 @media(min-width:768px){
    #navbar{
       min-width:95vw;
+      margin: 0 auto;
    }
    .region-navigation{
-      min-width:95vw;
+      width:355.8%;
       max-width: 95vw;
+      min-height:150px;
+      margin: 0 auto;
       margin-left: -8px;
+      border-radius:8px;
    }
    ul.menu.menu--main.nav.navbar-nav{
-      width:94.8vw;
+      width:94.9vw;
       margin-left: -30px;
    }
    .main-container, .js-quickedit-main-content,.section-footer{
       min-width:95vw;
+      max-width: 95vw;
+   }
+   .social_media{
+      width:356%;
       max-width: 95vw;
    }
 }
