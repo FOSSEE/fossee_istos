@@ -145,6 +145,14 @@
         {% block content %}
           <a id="main-content"></a>
           {{ page.content }}
+          <div class="sub-contents">
+            <div class="sub-content">
+              {{ page.left_content }}
+            </div>
+            <div class="sub-content">
+              {{ page.right_content }}           
+            </div>
+          </div>
         {% endblock %}
       </section>
 
@@ -160,16 +168,30 @@
   </div>
 {% endblock %}
 
-{% if page.footer or page.footer1 %}
-    <footer class="footer" role="contentinfo"style>
-        {# <div class="container"> #}
-          <div>
-            {{ page.footer }}
-          </div>
-          <div class="row">
-            {{ page.footer1 }}
-          </div>
-          {# </div> #}
-         </div> 
-     </footer>
-{% endif %}
+
+<footer class="footer" role="contentinfo"style>
+    {% if page.footer %} 
+
+            {# <div class="container"> #}
+              <div>
+                {{ page.footer }}
+              </div>
+              {# </div> #}
+             {# </div>  #}
+    {% endif %}
+    {% if page.footer_first or page.footer_second or page.footer_third %}
+            {# <div style="display:flex"> #}
+              <div class="site-footers section-footer">
+                <div class="sub-footer">
+                  {{ page.footer_first }}
+                </div>
+                <div class="sub-footer">
+                  {{ page.footer_second }}
+                </div>
+                <div class="sub-footer">
+                  {{ page.footer_third}}
+                </div>
+              </div>
+             {# </div>  #}
+    {% endif %}
+</footer>

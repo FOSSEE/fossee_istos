@@ -338,8 +338,8 @@ footer {
       margin-left: -6.9px;
    }
    .region-navigation img{
-      padding-top: 35px;
-      padding-left: 30px;
+      padding-top: 40px;
+      padding-left: 35px;
    }
    ul.menu.menu--main.nav.navbar-nav{
       width:94.9vw;
@@ -354,3 +354,31 @@ footer {
       max-width: 95vw;
    }
 }
+
+
+
+/* 
+   @Region Styles
+*/
+ 
+ .site-footers{
+    display: flex;
+    width:100vw;
+    margin: 0 auto;
+    padding: 10px 0;
+ }
+
+ .sub-footer{
+    min-width:calc(100% / 3);
+    text-align: center;
+ }
+
+ .sub-contents{
+    display: flex;
+    justify-content: space-between;
+ }
+ .sub-content{
+   min-width:46%;
+   text-align: center;
+   padding: 5px;
+ }
