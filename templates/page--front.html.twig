@@ -131,8 +131,8 @@
         {% if page.highlighted %}
           {% block highlighted %}
             <div class="highlighted">{{ page.highlighted }}
-              {% if is_front and show_slideshow %}
-  
+              {% if is_front %}
+                {% if show_slideshow %}
                   <div class="container-">
                       <div class="flexslider">
                           <ul class="slides">
@@ -142,6 +142,32 @@
                           </ul>
                       </div>
                   </div>
+                {% endif %}
+
+                {% if show_slideshow == false %}
+                  <div class="container-">
+                      <div class="flexslider">
+                          <ul class="slides">
+                              <li>
+                                <a href="#">
+                                  <img src="{{ directory }}/image/demo2.png" alt="Demo Slider Image 1"/>
+                                  <div class="slider-caption">
+                                    <h2 class="slider-title">Demo Image 1</h2>
+                                  </div>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <img src="{{ directory }}/image/demo2.png" alt="Demo Slider Image 2"/>
+                                  <div class="slider-caption">
+                                    <h2 class="slider-title">Demo Image 2</h2>
+                                  </div>
+                                </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                {% endif %}
 
               {% endif %}
             </div>
@@ -159,7 +185,15 @@
         {% block content %}
           <a id="main-content"></a>
           {{ page.content }}
-        {% endblock %}
+          <div class="sub-contents">
+            <div class="sub-content">
+              {{ page.left_content }}
+            </div>
+            <div class="sub-content">
+              {{ page.right_content }}           
+            </div>
+          </div>
+        {% endblock %}`
       </section>
 
       {# Sidebar Second #}
@@ -174,17 +208,24 @@
   </div>
 {% endblock %}
 
-{% if page.footer or page.footer1 %}
-    <footer class="footer" role="contentinfo"style>
-        {# <div class="container"> #}
-          <div>
-            {{ page.footer }}
-          </div>
-          <div class="row">
-            {{ page.footer1 }}
-          </div>
-          {# </div> #}
-         </div> 
-     </footer>
-{% endif %}
+<footer class="footer" role="contentinfo"style>
+    {% if page.footer %} 
+              <div>
+                {{ page.footer }}
+              </div>
+    {% endif %}
+    {% if page.footer_first or page.footer_second or page.footer_third %}
+              <div class="site-footers section-footer">
+                <div class="sub-footer">
+                  {{ page.footer_first }}
+                </div>
+                <div class="sub-footer">
+                  {{ page.footer_second }}
+                </div>
+                <div class="sub-footer">
+                  {{ page.footer_third}}
+                </div>
+              </div>
+    {% endif %}
+</footer>
 

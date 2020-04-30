@@ -63,12 +63,13 @@ function fossee_istos_preprocess_page(&$variables) {
         $path = base_path() . drupal_get_path('theme', 'fossee_istos') . theme_get_setting('slide_image_path_' . $i, 'fossee_istos');
       }
       $slider_content[$i] = '<li>
-        <img src="' . $path . '" alt="loading..." />
-        <div class="slider-caption">
-          <h2 class="slider-title">' . theme_get_setting('slide_title_' . $i, 'fossee_istos').'</h2>
-          <div class="clearfix"><p class="slider-description">' . theme_get_setting('slide_description_' . $i, 'fossee_istos').'</p></div>
-          <a href=' . theme_get_setting('slide_url_' . $i, 'fossee_istos') . ' class="more-link">Read more</a>
-        </div>
+          <a href=' . theme_get_setting('slide_url_' . $i, 'fossee_istos') . '>
+            <img src="' . $path . '" alt="loading..." />
+            <div class="slider-caption">
+              <h2 class="slider-title">' . theme_get_setting('slide_title_' . $i, 'fossee_istos').'</h2>
+              <div class="clearfix"><p class="slider-description">' . theme_get_setting('slide_description_' . $i, 'fossee_istos').'</p></div>
+            </div>
+          </a>
       </li>';
     }
     return $slider_content;
